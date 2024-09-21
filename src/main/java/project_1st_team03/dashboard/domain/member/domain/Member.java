@@ -27,4 +27,13 @@ public class Member extends BaseEntity {
 
     @OneToMany(mappedBy = "member")
     private List<Like> likes = new ArrayList<>();
+
+
+    public static Member createMember(String email, String password) {
+        Member member = new Member();
+        member.email = email;
+        member.password = password;
+
+        return member;
+    }
 }

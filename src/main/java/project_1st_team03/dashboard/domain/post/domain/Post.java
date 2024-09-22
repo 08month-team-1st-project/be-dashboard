@@ -1,10 +1,8 @@
 package project_1st_team03.dashboard.domain.post.domain;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.util.StringUtils;
 import project_1st_team03.dashboard.domain.comment.domain.Comment;
 import project_1st_team03.dashboard.domain.common.BaseEntity;
 import project_1st_team03.dashboard.domain.like.domain.Like;
@@ -13,6 +11,7 @@ import project_1st_team03.dashboard.domain.member.domain.Member;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -36,4 +35,20 @@ public class Post extends BaseEntity {
 
     @OneToMany(mappedBy = "post")
     private List<Like> likes = new ArrayList<>();
+
+    public Post(Member member, String title, String content) {
+        this.member = member;
+        this.title = title;
+        this.content = content;
+    }
+
+    public void updateTitleAndContent(String title, String content) {
+
+        if(StringUtils.hasText(title)){
+            this.title = title;
+        }
+        if(StringUtils.hasText(content)){
+            this.content = content;
+        }
+    }
 }

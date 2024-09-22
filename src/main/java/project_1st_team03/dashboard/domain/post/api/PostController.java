@@ -3,12 +3,9 @@ package project_1st_team03.dashboard.domain.post.api;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import project_1st_team03.dashboard.domain.post.application.PostService;
-import project_1st_team03.dashboard.domain.post.dto.CreatePostRequest;
+import project_1st_team03.dashboard.domain.post.dto.PostRequest;
 
 /**
  * TODO
@@ -22,10 +19,15 @@ public class PostController {
     private final PostService postService;
 
     @PostMapping("/posts")
-    public ResponseEntity<String> createPost(@Valid @RequestBody CreatePostRequest request) {
+    public ResponseEntity<String> createPost(@Valid @RequestBody PostRequest request) {
         postService.createPost(request);
         return ResponseEntity.ok("게시물이 성공적으로 작성되었습니다.");
     }
 
+    @PutMapping("/posts/{postId}")
+    public ResponseEntity<String> updatePost(@PathVariable long postId, @Valid @RequestBody PostRequest request) {
+        postService.updatePost(postId, request);
+        return ResponseEntity.ok("게시물이 성공적으로 수정되었습니다.");
+    }
 
 }

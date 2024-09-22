@@ -6,7 +6,7 @@ import org.hibernate.validator.constraints.Length;
 
 @Getter //@Setter
 @NoArgsConstructor
-public class CreatePostRequest {
+public class PostRequest {
 
     @Length(min = 5 , max = 30 ,message = "제목은 5 ~ 30자 내외로 입력해주세요")
     private String title;

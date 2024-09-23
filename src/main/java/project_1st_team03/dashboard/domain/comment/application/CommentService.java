@@ -31,8 +31,8 @@ public final CommentRepository commentRepository;
         List<CommentsResponse> commentsResponses = comments.stream().map((comment)->
             CommentsResponse.builder()
                     .content(comment.getContent())
-                    .memberId(comment.getMember())
-                    .postId(comment.getPost())
+                    .memberId(1L)
+                    .postId(1)
                     .createdAt(comment.getCreatedAt())
                     .modifiedAt(comment.getModifiedAt())
                     .build()

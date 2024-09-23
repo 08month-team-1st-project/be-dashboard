@@ -16,8 +16,8 @@ import java.util.Date;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class CommentsResponse {
     private String content;
-    private Post postId;
-    private Member memberId;
+    private Integer postId;
+    private Long memberId;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
 

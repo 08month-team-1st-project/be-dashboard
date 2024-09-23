@@ -10,7 +10,9 @@ import project_1st_team03.dashboard.domain.comment.domain.Comment;
 import project_1st_team03.dashboard.domain.comment.dto.CommentsRequest;
 import project_1st_team03.dashboard.domain.comment.dto.CommentsResponse;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -29,9 +31,13 @@ public class CommentController {
     }
 
     @GetMapping("/comments")
-    public ResponseEntity<List<CommentsResponse>> getAllComments() {
+    public ResponseEntity<Map<String,Object>> getAllComments() {
         List<CommentsResponse> comments = commentService.getAllComment();
-        return ResponseEntity.ok(comments);
+        //comments 필드로 응답.
+        Map<String, Object> response = new HashMap<>();
+        response.put("comments", comments);
+
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/comments/:comment_id")

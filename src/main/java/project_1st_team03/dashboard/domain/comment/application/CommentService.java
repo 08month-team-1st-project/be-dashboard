@@ -40,4 +40,8 @@ public final CommentRepository commentRepository;
         return commentsResponses;
 
     }
+
+    public void deleteComment(Long commentId) {
+        commentRepository.deleteById(commentId);
+    }
 }

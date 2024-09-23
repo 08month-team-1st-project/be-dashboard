@@ -68,4 +68,8 @@ public class PostService {
                 .map(PostListResponse::new);
     }
 
+    public Page<PostListResponse> searchPostPage(String email, Pageable pageable) {
+        return postRepository.findPostPageByEmail(email, pageable)
+                .map(PostListResponse::new);
+    }
 }

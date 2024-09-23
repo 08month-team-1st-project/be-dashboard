@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project_1st_team03.dashboard.domain.post.application.PostService;
@@ -36,5 +37,12 @@ public class PostController {
     @GetMapping("/posts")
     public ResponseEntity<Page<PostListResponse>> getPosts(Pageable pageable) {
         return ResponseEntity.ok(postService.getPostPage(pageable));
+    }
+
+    @GetMapping("/posts/search")
+    public ResponseEntity<Page<PostListResponse>> searchPosts(
+                                @RequestParam("autor_email") String autorEmail,
+                                Pageable pageable) {
+        return ResponseEntity.ok(postService.searchPostPage(autorEmail, pageable));
     }
 }

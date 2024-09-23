@@ -41,12 +41,26 @@ public class TestDataInit {
         Post post1_1 = new Post(member1, "게시글1_1", "내용1");
         Post post1_2 = new Post(member1, "게시글1_2", "내용1");
         Post post2 = new Post(member2, "게시글2", "내용2");
-        Post post3 = new Post(member3, "게시글3", "내용3");
+        Post post3 = new Post(member2, "게시글3", "내용3");
+        Post post4 = new Post(member2, "게시글4", "내용4");
+        Post post5 = new Post(member2, "게시글5", "내용5");
+        Post post6 = new Post(member2, "게시글6", "내용6");
+        Post post7 = new Post(member3, "게시글7", "내용7");
+        Post post8 = new Post(member3, "게시글8", "내용8");
+        Post post9 = new Post(member3, "게시글9", "내용9");
+        Post post10 = new Post(member3, "게시글10", "내용10");
 
         postRepository.save(post1_1);
         postRepository.save(post1_2);
         postRepository.save(post2);
         postRepository.save(post3);
+        postRepository.save(post4);
+        postRepository.save(post5);
+        postRepository.save(post6);
+        postRepository.save(post7);
+        postRepository.save(post8);
+        postRepository.save(post9);
+        postRepository.save(post10);
 
     }
 }

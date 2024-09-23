@@ -9,6 +9,7 @@ import project_1st_team03.dashboard.domain.member.dao.MemberRepository;
 import project_1st_team03.dashboard.domain.member.domain.Member;
 import project_1st_team03.dashboard.domain.post.dao.PostRepository;
 import project_1st_team03.dashboard.domain.post.domain.Post;
+import project_1st_team03.dashboard.domain.post.dto.PostDetailDto;
 import project_1st_team03.dashboard.domain.post.dto.PostListResponse;
 import project_1st_team03.dashboard.domain.post.dto.PostRequest;
 import project_1st_team03.dashboard.domain.post.exception.PostException;
@@ -71,5 +72,12 @@ public class PostService {
     public Page<PostListResponse> searchPostPage(String email, Pageable pageable) {
         return postRepository.findPostPageByEmail(email, pageable)
                 .map(PostListResponse::new);
+    }
+
+    public PostDetailDto getPostDetail(long postId) {
+        Post findPost = postRepository.findById(postId)
+                .orElseThrow(() -> new PostException(NOT_FOUND_POST));
+
+        return new PostDetailDto(findPost);
     }
 }

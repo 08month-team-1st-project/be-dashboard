@@ -1,12 +1,15 @@
 package project_1st_team03.dashboard.domain.post.application;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project_1st_team03.dashboard.domain.member.dao.MemberRepository;
 import project_1st_team03.dashboard.domain.member.domain.Member;
 import project_1st_team03.dashboard.domain.post.dao.PostRepository;
 import project_1st_team03.dashboard.domain.post.domain.Post;
+import project_1st_team03.dashboard.domain.post.dto.PostListResponse;
 import project_1st_team03.dashboard.domain.post.dto.PostRequest;
 import project_1st_team03.dashboard.domain.post.exception.PostException;
 
@@ -59,4 +62,10 @@ public class PostService {
 
         findPost.updateTitleAndContent(request.getTitle(), request.getContent());
     }
+
+    public Page<PostListResponse> getPostPage(Pageable pageable) {
+        return postRepository.findPostPage(pageable)
+                .map(PostListResponse::new);
+    }
+
 }

@@ -21,7 +21,9 @@ public class CommentController {
     private final CommentService commentService;
 
     @PostMapping("/comments")
-    public ResponseEntity<String> createComment(@RequestBody CommentsRequest request) {
+    public ResponseEntity<String> createComment(
+            @RequestBody CommentsRequest request) {
+
         commentService.createComments(request);
         return ResponseEntity.ok("댓글이 성공적으로 작성되었습니다.");
     }
@@ -32,9 +34,19 @@ public class CommentController {
         return ResponseEntity.ok(comments);
     }
 
-    @DeleteMapping("/comment/:comment_id")
-    public ResponseEntity<String> deleteCommentByPathId(@PathVariable("comment_id") Long commentId){
-        commentService.deleteComment(commentId);
+    @DeleteMapping("/comments/:comment_id")
+    public ResponseEntity<String> deleteCommentByPathId(
+            @PathVariable("comment_id") Long id){
+        commentService.deleteComment(id);
         return ResponseEntity.ok("댓글이 삭제되었습니다.");
+    }
+
+    @PutMapping("/comments/:comment_id")
+    public ResponseEntity<String> updateComment(
+            @PathVariable("comment_id") Long id,
+            @RequestBody CommentsRequest commentRequest){
+
+        commentService.updateComment(id,commentRequest);
+        return ResponseEntity.ok("댓글이 성공적으로 수정되었습니다.");
     }
 }

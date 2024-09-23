@@ -44,4 +44,13 @@ public final CommentRepository commentRepository;
     public void deleteComment(Long commentId) {
         commentRepository.deleteById(commentId);
     }
+
+    public void updateComment(Long id, CommentsRequest commentRequest) {
+        Comment comment = commentRepository.findById(id).orElseThrow(
+                ()-> new RuntimeException("Comment not found"));
+        comment.setContent(commentRequest.getContent());
+        commentRepository.save(comment);
+
+    }
+
 }

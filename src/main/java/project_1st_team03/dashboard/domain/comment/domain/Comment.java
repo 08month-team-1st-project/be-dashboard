@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 @Getter
+@Setter
 @Entity
 public class Comment extends BaseEntity {
 

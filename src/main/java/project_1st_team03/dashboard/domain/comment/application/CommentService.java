@@ -6,7 +6,6 @@ import project_1st_team03.dashboard.domain.comment.dao.CommentRepository;
 import project_1st_team03.dashboard.domain.comment.domain.Comment;
 import project_1st_team03.dashboard.domain.comment.dto.CommentsRequest;
 import project_1st_team03.dashboard.domain.comment.dto.CommentsResponse;
-import project_1st_team03.dashboard.domain.member.domain.Member;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,9 +29,10 @@ public final CommentRepository commentRepository;
 
         List<CommentsResponse> commentsResponses = comments.stream().map((comment)->
             CommentsResponse.builder()
+                    .id(comment.getId())
                     .content(comment.getContent())
                     .memberId(1L)
-                    .postId(1)
+                    .postId(1L)
                     .createdAt(comment.getCreatedAt())
                     .modifiedAt(comment.getModifiedAt())
                     .build()

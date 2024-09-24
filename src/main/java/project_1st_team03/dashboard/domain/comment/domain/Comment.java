@@ -2,6 +2,7 @@ package project_1st_team03.dashboard.domain.comment.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import project_1st_team03.dashboard.domain.comment.dto.CommentsRequest;
 import project_1st_team03.dashboard.domain.comment.dto.CommentsResponse;
 import project_1st_team03.dashboard.domain.common.BaseEntity;
 import project_1st_team03.dashboard.domain.member.domain.Member;
@@ -31,16 +32,9 @@ public class Comment extends BaseEntity {
     private String content;
 
 
-//    // Comment 리스트를 CommentsResponse 리스트로 변환하는 메서드
-//    public List<CommentsResponse> toCommentsResponseList(List<Comment> comments) {
-//        return comments.stream().map(comment ->
-//                CommentsResponse.builder()
-//                        .content(comment.getContent())
-//                        .memberId(comment.getMember()) // memberId는 Member 객체에서 가져오는 방식으로 수정
-//                        .postId(comment.getPost())     // postId도 Post 객체에서 가져오는 방식으로 수정
-//                        .createdAt(comment.getCreatedAt())
-//                        .modifiedAt(comment.getModifiedAt())
-//                        .build()
-//        ).collect(Collectors.toList());
+//    public Comment(CommentsRequest commentsRequest) {
+//        this.content = commentsRequest.getContent();
+//        this.post = commentsRequest.getPostId();
+//        this.member = commentsRequest.getAuthor();
 //    }
 }

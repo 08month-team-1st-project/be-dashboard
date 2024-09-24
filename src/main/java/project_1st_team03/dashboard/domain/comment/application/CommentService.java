@@ -24,17 +24,17 @@ public final PostRepository postRepository;
 
     public void createComments(CommentsRequest commentsRequest) {
 
-        Post post = postRepository.findById(commentsRequest.getPostId())
-                .orElseThrow(() -> new EntityNotFoundException("Post not found"));
+        //Post post = postRepository.findById(commentsRequest.getPostId())
+        //        .orElseThrow(() -> new EntityNotFoundException("Post not found"));
 
-        long number = Long.parseLong( commentsRequest.getAuthor());
-        Member member = memberRepository.findById(number)
-                .orElseThrow(() -> new EntityNotFoundException("Member not found"));
+      //  long author = Long.parseLong( commentsRequest.getAuthor());
+       // Member member = memberRepository.findById(author)
+        //        .orElseThrow(() -> new EntityNotFoundException("Member not found"));
 
         Comment comment = Comment.builder()
                 .content(commentsRequest.getContent())
-                .member(member)
-                .post(post)
+                .member(null)
+                .post(null)
                 .build();
         commentRepository.save(comment);
     }

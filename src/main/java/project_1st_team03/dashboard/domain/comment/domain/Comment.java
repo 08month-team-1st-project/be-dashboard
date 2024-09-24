@@ -8,11 +8,12 @@ import project_1st_team03.dashboard.domain.common.BaseEntity;
 import project_1st_team03.dashboard.domain.member.domain.Member;
 import project_1st_team03.dashboard.domain.post.domain.Post;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Getter
@@ -30,6 +31,9 @@ public class Comment extends BaseEntity {
 
     @Column(nullable = false, length = 50)
     private String content;
+
+    @OneToMany(mappedBy = "comment")
+    private List<Reply> replies = new ArrayList<>();
 
 
 //    public Comment(CommentsRequest commentsRequest) {

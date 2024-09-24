@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import project_1st_team03.dashboard.domain.member.dao.MemberRepository;
 import project_1st_team03.dashboard.domain.member.domain.Member;
 import project_1st_team03.dashboard.global.security.MemberDetails;
@@ -17,6 +18,11 @@ import static project_1st_team03.dashboard.global.exception.ErrorCode.NOT_FOUND_
 public class ApplicationConfig {
 
     private final MemberRepository memberRepository;
+
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Bean
     public UserDetailsService userDetailsService() {

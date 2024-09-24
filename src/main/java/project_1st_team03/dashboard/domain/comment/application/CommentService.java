@@ -1,11 +1,16 @@
 package project_1st_team03.dashboard.domain.comment.application;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import project_1st_team03.dashboard.domain.comment.dao.CommentRepository;
 import project_1st_team03.dashboard.domain.comment.domain.Comment;
 import project_1st_team03.dashboard.domain.comment.dto.CommentsRequest;
 import project_1st_team03.dashboard.domain.comment.dto.CommentsResponse;
+import project_1st_team03.dashboard.domain.member.dao.MemberRepository;
+import project_1st_team03.dashboard.domain.member.domain.Member;
+import project_1st_team03.dashboard.domain.post.dao.PostRepository;
+import project_1st_team03.dashboard.domain.post.domain.Post;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,12 +19,22 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CommentService {
 public final CommentRepository commentRepository;
+public final MemberRepository memberRepository;
+public final PostRepository postRepository;
 
     public void createComments(CommentsRequest commentsRequest) {
+
+        Post post = postRepository.findById(commentsRequest.getPostId())
+                .orElseThrow(() -> new EntityNotFoundException("Post not found"));
+
+        long number = Long.parseLong( commentsRequest.getAuthor());
+        Member member = memberRepository.findById(number)
+                .orElseThrow(() -> new EntityNotFoundException("Member not found"));
+
         Comment comment = Comment.builder()
                 .content(commentsRequest.getContent())
-                .member(null)
-                .post(null)
+                .member(member)
+                .post(post)
                 .build();
         commentRepository.save(comment);
     }

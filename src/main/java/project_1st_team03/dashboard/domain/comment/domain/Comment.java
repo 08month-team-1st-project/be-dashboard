@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor
 @Builder
 @Getter
 @Setter

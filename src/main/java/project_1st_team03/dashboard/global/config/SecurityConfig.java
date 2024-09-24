@@ -1,4 +1,4 @@
-package project_1st_team03.dashboard.global.config.security;
+package project_1st_team03.dashboard.global.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

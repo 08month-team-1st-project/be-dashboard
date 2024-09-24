@@ -6,6 +6,7 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import project_1st_team03.dashboard.domain.member.dao.MemberRepository;
+import project_1st_team03.dashboard.global.security.MemberRole;
 
 import static project_1st_team03.dashboard.domain.member.domain.Member.createMember;
 
@@ -24,10 +25,10 @@ public class TestDataInit {
     @EventListener(value = ApplicationReadyEvent.class)
     public void initData() {
         log.info("실습용 데이터 초기화");
-        memberRepository.save(createMember("member1@naver.com", "password"));
-        memberRepository.save(createMember("member2@naver.com", "password"));
-        memberRepository.save(createMember("member3@naver.com", "password"));
-        memberRepository.save(createMember("member4@naver.com", "password"));
-        memberRepository.save(createMember("member5@naver.com", "password"));
+        memberRepository.save(createMember("member1@naver.com", "password", MemberRole.USER));
+        memberRepository.save(createMember("member2@naver.com", "password", MemberRole.USER));
+        memberRepository.save(createMember("member3@naver.com", "password", MemberRole.USER));
+        memberRepository.save(createMember("member4@naver.com", "password", MemberRole.USER));
+        memberRepository.save(createMember("member5@naver.com", "password", MemberRole.USER));
     }
 }

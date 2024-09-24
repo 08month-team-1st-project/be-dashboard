@@ -35,10 +35,11 @@ public class Member extends BaseEntity {
     @Enumerated(value = EnumType.STRING)
     private MemberRole role;
 
-    public static Member createMember(String email, String password) {
+    public static Member createMember(String email, String password, MemberRole role) {
         Member member = new Member();
         member.email = email;
         member.password = password;
+        member.role = role;
 
         return member;
     }

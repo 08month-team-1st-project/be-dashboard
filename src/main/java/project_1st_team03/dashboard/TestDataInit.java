@@ -29,20 +29,20 @@ public class TestDataInit {
     @EventListener(value = ApplicationReadyEvent.class)
     public void initData() {
         log.info("실습용 데이터 초기화");
-        memberRepository.save(createMember("member1@naver.com", "password", MemberRole.USER));
-        memberRepository.save(createMember("member2@naver.com", "password", MemberRole.USER));
-        memberRepository.save(createMember("member3@naver.com", "password", MemberRole.USER));
-        memberRepository.save(createMember("member4@naver.com", "password", MemberRole.USER));
-        memberRepository.save(createMember("member5@naver.com", "password", MemberRole.USER));
-        Member member1 = createMember("member1@naver.com", "password");
-        Member member2 = createMember("member2@naver.com", "password");
-        Member member3 = createMember("member3@naver.com", "password");
-        Member member4 = createMember("member4@naver.com", "password");
+
+        String password = "$2a$10$hypLJDgNgKTU6SdmeX9b5eILQONFXeK0FjdB3BoofwIGO/lWUL0kW";
+
+        Member member1 = createMember("member1@naver.com", password, MemberRole.USER);
+        Member member2 = createMember("member2@naver.com", password, MemberRole.USER);
+        Member member3 = createMember("member3@naver.com", password, MemberRole.USER);
+        Member member4 = createMember("member4@naver.com", password, MemberRole.USER);
+        Member member5 = createMember("member5@naver.com", password, MemberRole.USER);
 
         memberRepository.save(member1);
         memberRepository.save(member2);
         memberRepository.save(member3);
         memberRepository.save(member4);
+        memberRepository.save(member5);
 
         Post post1_1 = new Post(member1, "게시글1_1", "내용1");
         Post post1_2 = new Post(member1, "게시글1_2", "내용1");

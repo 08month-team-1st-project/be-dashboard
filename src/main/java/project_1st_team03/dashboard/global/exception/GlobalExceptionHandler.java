@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import project_1st_team03.dashboard.domain.post.exception.PostException;
+import project_1st_team03.dashboard.domain.member.exception.MemberException;
 
 @Slf4j
 @RestControllerAdvice
@@ -23,10 +23,13 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest().body(new ErrorResult(e));
     }
 
-    @ExceptionHandler(PostException.class)
-    public ResponseEntity<ErrorResult> handlePostException(PostException e) {
-        log.error("[PostException] {}", e.getErrorCode().getMessage());
-        return ResponseEntity.badRequest().body(new ErrorResult(e.getErrorCode()));
+    @ExceptionHandler(MemberException.class)
+    public ResponseEntity<ErrorResult> handleMemberException(MemberException e) {
+        log.error("[MemberException] message= {}", e.getMessage());
+
+        ErrorCode errorCode = e.getErrorCode();
+        return ResponseEntity.status(errorCode.getHttpStatus())
+                .body(new ErrorResult(errorCode));
     }
 
 }

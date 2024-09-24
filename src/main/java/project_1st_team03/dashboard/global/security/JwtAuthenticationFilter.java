@@ -39,18 +39,18 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         // 요청 시에 Authorization 이라는 헤더로 jwt 인증 토큰을 전달한 상태
         // 해당 헤더에 담아온 토큰을 꺼낸다
-        final String authHeader = request.getHeader("Authorization");
-        final String jwtToken;
+        final String jwtToken = request.getHeader("Authorization");
         final String userEmail;
+
+        log.debug("token={}" , jwtToken);
 
         try {
             // 토큰이 필요하지 않은 api일 경우 로직 처리없이 다음 필터로 이동
-            if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            if (jwtToken == null) {
                 filterChain.doFilter(request, response);
                 return;
             }
 
-            jwtToken = authHeader.substring(7); // Bearer 접두사 제거하여 토큰추출
             userEmail = jwtService.extractUsername(jwtToken);
 
 

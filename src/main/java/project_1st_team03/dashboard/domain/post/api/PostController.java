@@ -5,16 +5,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import project_1st_team03.dashboard.domain.post.application.PostService;
 import project_1st_team03.dashboard.domain.post.dto.PostDetailDto;
 import project_1st_team03.dashboard.domain.post.dto.PostListResponse;
 import project_1st_team03.dashboard.domain.post.dto.PostRequest;
+import project_1st_team03.dashboard.global.security.MemberDetails;
 
-/**
- * TODO
- * 회원인증 로직 연결
- */
 @RequiredArgsConstructor
 @RequestMapping("/api")
 @RestController
@@ -23,14 +21,17 @@ public class PostController {
     private final PostService postService;
 
     @PostMapping("/posts")
-    public ResponseEntity<String> createPost(@Valid @RequestBody PostRequest request) {
-        postService.createPost(request);
+    public ResponseEntity<String> createPost(@AuthenticationPrincipal MemberDetails memberDetails,
+                                             @Valid @RequestBody PostRequest request) {
+        postService.createPost(memberDetails, request);
         return ResponseEntity.ok("게시물이 성공적으로 작성되었습니다.");
     }
 
     @PutMapping("/posts/{postId}")
-    public ResponseEntity<String> updatePost(@PathVariable long postId, @Valid @RequestBody PostRequest request) {
-        postService.updatePost(postId, request);
+    public ResponseEntity<String> updatePost(@AuthenticationPrincipal MemberDetails memberDetails,
+                                             @PathVariable("postId") long postId,
+                                             @Valid @RequestBody PostRequest request) {
+        postService.updatePost(memberDetails, postId, request);
         return ResponseEntity.ok("게시물이 성공적으로 수정되었습니다.");
     }
 

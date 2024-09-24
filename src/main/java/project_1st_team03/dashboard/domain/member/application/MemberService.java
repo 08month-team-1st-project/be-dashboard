@@ -1,6 +1,8 @@
 package project_1st_team03.dashboard.domain.member.application;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,14 +14,14 @@ import project_1st_team03.dashboard.domain.member.dto.SignupRequest;
 import project_1st_team03.dashboard.domain.member.exception.MemberException;
 import project_1st_team03.dashboard.global.security.JwtService;
 import project_1st_team03.dashboard.global.security.MemberDetails;
-import project_1st_team03.dashboard.global.security.MemberRole;
 
-import java.util.HashMap;
 import java.util.Map;
 
-import static project_1st_team03.dashboard.global.exception.ErrorCode.*;
-import static project_1st_team03.dashboard.global.security.MemberRole.*;
+import static project_1st_team03.dashboard.global.exception.ErrorCode.ALREADY_REGISTERED_EMAIL;
+import static project_1st_team03.dashboard.global.exception.ErrorCode.NOT_CORRECT_ACCOUNT_ID_OR_PASSWORD;
+import static project_1st_team03.dashboard.global.security.MemberRole.USER;
 
+@Slf4j
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 @Service
@@ -54,5 +56,12 @@ public class MemberService {
                 new MemberDetails(findMember));
 
         return new LoginResponse(findMember.getEmail(), accessToken);
+    }
+
+    // TODO 로그아웃: 프론트 코드 수정 & 일정에 따라서 수정 계획
+    public void logout(UserDetails userDetails) {
+        // 임시 확인용
+        log.debug(userDetails.getUsername());
+        log.debug(userDetails.getAuthorities().toString());
     }
 }

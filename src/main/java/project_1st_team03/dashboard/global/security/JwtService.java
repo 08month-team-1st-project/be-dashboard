@@ -5,6 +5,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -18,13 +19,16 @@ import java.util.function.Function;
 /**
  * 토큰 재발급, 리프레시 토큰 등의 로직은 시간상 구현 X
  */
+@Slf4j
 @Service
 public class JwtService {
-    
-    @Value("${jwt.secretKey}") // base64 인코딩한 키값으로 초기화
-    private static final String SECRET_KEY = "SECRET_KEY";
-    private static final long ACCESS_TOKEN_VALID_TIME = 1000L * 60 * 30; // 30분
 
+    private static final long ACCESS_TOKEN_VALID_TIME = 1000L * 60 * 30; // 30분
+    private final String secretKey; // base64 인코딩한 키값으로 초기화
+
+    public JwtService(@Value("${jwt.secretKey}") String secretKey) {
+        this.secretKey = secretKey;
+    }
 
 
     // 추가 클레임 없이 토큰 생성
@@ -78,7 +82,7 @@ public class JwtService {
     }
 
     private Key getSigningKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
+        byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         return Keys.hmacShaKeyFor(keyBytes); // HMAC-SHA 알고리즘에 맞는 Key 객체 생성
     }
 

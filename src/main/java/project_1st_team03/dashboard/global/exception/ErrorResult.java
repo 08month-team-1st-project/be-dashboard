@@ -20,7 +20,7 @@ public class ErrorResult {
     private String message;
 
 
-    private List<FieldErrorCustom> filedErrors;
+    private List<FieldErrorCustom> fieldErrors;
 
     public ErrorResult(String code, int httpStatus, String message) {
         this.code = code;
@@ -37,6 +37,6 @@ public class ErrorResult {
     public ErrorResult(MethodArgumentNotValidException e) {
         this.code = String.valueOf(HttpStatus.BAD_REQUEST);
         this.httpStatus = HttpStatus.BAD_REQUEST.value();
-        this.filedErrors = getFieldErrorList(e.getFieldErrors());
+        this.fieldErrors = getFieldErrorList(e.getFieldErrors());
     }
 }

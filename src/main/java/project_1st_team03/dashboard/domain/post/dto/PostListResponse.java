@@ -14,6 +14,7 @@ public class PostListResponse {
     private Long id;
 
     private String author;
+
     private String title;
     
     // TODO 그대로 반환할지 고민 (일단 전체 반환으로 해놓음)
@@ -22,6 +23,8 @@ public class PostListResponse {
     private long likeCount;
 
     private LocalDateTime createdAt;
+
+    private LocalDateTime modifiedAt;
 
 
 
@@ -32,5 +35,6 @@ public class PostListResponse {
         this.content = post.getContent();
         this.likeCount = post.getLikeCount();
         this.createdAt = post.getCreatedAt();
+        this.modifiedAt = post.getModifiedAt();
     }
 }

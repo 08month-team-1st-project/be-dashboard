@@ -13,6 +13,7 @@ import project_1st_team03.dashboard.domain.member.application.MemberService;
 import project_1st_team03.dashboard.domain.member.dto.LoginRequest;
 import project_1st_team03.dashboard.domain.member.dto.LoginResponse;
 import project_1st_team03.dashboard.domain.member.dto.SignupRequest;
+import project_1st_team03.dashboard.global.security.MemberDetails;
 
 
 /** 로그아웃 기능
@@ -45,8 +46,8 @@ public class MemberController {
      * 인증이 필요한 요청에 잘 적용되는지 확인하는 용으로만 구현해둔 상태
      */
     @PostMapping("/logout")
-    public ResponseEntity<String> logout(@AuthenticationPrincipal UserDetails userDetails) {
-        memberService.logout(userDetails);
+    public ResponseEntity<String> logout(@AuthenticationPrincipal MemberDetails memberDetails) {
+        memberService.logout(memberDetails);
         return ResponseEntity.ok("로그아웃되었습니다.");
     }
 

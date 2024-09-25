@@ -21,18 +21,18 @@ public class PostController {
     private final PostService postService;
 
     @PostMapping("/posts")
-    public ResponseEntity<String> createPost(@AuthenticationPrincipal MemberDetails memberDetails,
+    public ResponseEntity<Void> createPost(@AuthenticationPrincipal MemberDetails memberDetails,
                                              @Valid @RequestBody PostRequest request) {
         postService.createPost(memberDetails, request);
-        return ResponseEntity.ok("게시물이 성공적으로 작성되었습니다.");
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("/posts/{postId}")
-    public ResponseEntity<String> updatePost(@AuthenticationPrincipal MemberDetails memberDetails,
+    public ResponseEntity<Void> updatePost(@AuthenticationPrincipal MemberDetails memberDetails,
                                              @PathVariable("postId") long postId,
                                              @Valid @RequestBody PostRequest request) {
         postService.updatePost(memberDetails, postId, request);
-        return ResponseEntity.ok("게시물이 성공적으로 수정되었습니다.");
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/posts")
@@ -42,7 +42,7 @@ public class PostController {
 
     @GetMapping("/posts/search")
     public ResponseEntity<Page<PostListResponse>> searchPosts(
-                                @RequestParam("autor_email") String autorEmail,
+                                @RequestParam("author_email") String autorEmail,
                                 Pageable pageable) {
         return ResponseEntity.ok(postService.searchPostPage(autorEmail, pageable));
     }
@@ -51,5 +51,12 @@ public class PostController {
     public ResponseEntity<PostDetailDto> getPostDetail(@PathVariable long postId) {
         return ResponseEntity.ok(postService.getPostDetail(postId));
     }
+
+    // TODO 작업용 (푸시할땐 지워야함)
+    @GetMapping("/comments")
+    public ResponseEntity<?> getAllComments() {
+        return ResponseEntity.ok().build();
+    }
+
 
 }

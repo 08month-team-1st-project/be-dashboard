@@ -1,6 +1,8 @@
 package project_1st_team03.dashboard.global.exception;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -13,6 +15,7 @@ import static project_1st_team03.dashboard.global.exception.FieldErrorCustom.get
  * 커스텀 예외 반환용 클래스
  */
 @Getter
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ErrorResult {
     private String code;

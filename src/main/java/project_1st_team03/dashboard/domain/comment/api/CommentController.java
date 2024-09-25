@@ -40,7 +40,7 @@ public class CommentController {
      */
     @GetMapping("/comments")
     public ResponseEntity<Map<String,Object>> getAllComments() {
-        //Question 질문입니다~
+
         List<CommentsResponse> comments = commentService.getAllComment();
         Map<String, Object> response = new HashMap<>();
         response.put("comments", comments);

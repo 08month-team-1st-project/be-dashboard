@@ -2,6 +2,7 @@ package project_1st_team03.dashboard.domain.comment.application;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project_1st_team03.dashboard.domain.comment.dao.CommentRepository;
@@ -18,8 +19,10 @@ import project_1st_team03.dashboard.global.security.MemberDetails;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CommentService {
 public final CommentRepository commentRepository;
 public final MemberRepository memberRepository;
@@ -31,7 +34,7 @@ public final PostRepository postRepository;
         //Post post = postRepository.findById(commentsRequest.getPostId())
         //        .orElseThrow(() -> new EntityNotFoundException("Post not found"));
 
-        String author =  memberDetails.getUsername();
+        String author = memberDetails.getUsername();
         Member member = memberRepository.findByEmail(author)
                 .orElseThrow(EntityNotFoundException::new);
 

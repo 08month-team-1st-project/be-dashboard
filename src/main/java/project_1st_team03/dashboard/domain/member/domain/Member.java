@@ -1,5 +1,11 @@
 package project_1st_team03.dashboard.domain.member.domain;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 import lombok.*;
 import project_1st_team03.dashboard.domain.comment.domain.Comment;

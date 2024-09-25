@@ -13,7 +13,7 @@ import project_1st_team03.dashboard.domain.member.domain.Member;
 @Entity
 public class Reply extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "comment_id", nullable = false)
+    @JoinColumn(name = "comment_id")
     private Comment comment; // Reference to the parent comment
 
     @ManyToOne(fetch = FetchType.LAZY)

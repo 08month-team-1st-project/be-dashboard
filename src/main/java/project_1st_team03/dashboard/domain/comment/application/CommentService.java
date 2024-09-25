@@ -34,9 +34,8 @@ public final PostRepository postRepository;
         //Post post = postRepository.findById(commentsRequest.getPostId())
         //        .orElseThrow(() -> new EntityNotFoundException("Post not found"));
 
-        String author = memberDetails.getUsername();
-        Member member = memberRepository.findByEmail(author)
-                .orElseThrow(EntityNotFoundException::new);
+        Member member = memberRepository.findByEmail( memberDetails.getUsername())
+                .orElseThrow(() -> new CommentException(ErrorCode.NOT_FOUND_COMMENT));
 
         Comment comment = Comment.builder()
                 .content(commentsRequest.getContent())

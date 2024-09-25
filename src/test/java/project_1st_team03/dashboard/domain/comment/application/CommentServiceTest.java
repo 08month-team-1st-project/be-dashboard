@@ -1,6 +1,7 @@
 package project_1st_team03.dashboard.domain.comment.application;
 
 import jakarta.persistence.EntityNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -31,6 +32,7 @@ import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
+@Slf4j
 class CommentServiceTest {
     @Mock
     private CommentRepository commentRepository;
@@ -44,12 +46,27 @@ class CommentServiceTest {
     String content;
     Member member;
     Post post;
+    List<Comment> comments;
+
+
+    //test가 실행되기전 실행
+    @BeforeEach
+    void beforeEach() {
+        content = "This is a comment";
+
+        member = new Member("asd@asd.com", "12345678!a", null, null, null, null);
+
+        comments = new ArrayList<>(Arrays.asList(
+                new Comment(null,member,"안녕하세요",null),
+                new Comment(null,member,"반갑습니다.",null)
+        ));
+    }
 
     @Test
     @DisplayName("댓글 생성")
     void createComments() {
         // Given: 테스트에 필요한 Mock 데이터 설정
-        String content = "새로운 댓글 내용";
+        content = "새로운 댓글 내용";
         Long postId = 1L;
         String email = "asd@asd.com";
         CommentsRequest commentsRequest = new CommentsRequest("author", content, postId);
@@ -88,16 +105,9 @@ class CommentServiceTest {
     @Test
     @DisplayName("댓글 조회")
     void getAllComment() {
-
         //given
-        Member member = new Member("asd@asd.com", "12345678!a", null, null, null, null);
-
-        List<Comment> comments = new ArrayList<>(Arrays.asList(
-                new Comment(null,member,"안녕하세요",null),
-                new Comment(null,member,"반갑습니다.",null)
-        ));
-
         when(commentRepository.findAll()).thenReturn(comments);
+
         //when
        List<CommentsResponse>commentsResponses = commentService.getAllComment();
 
@@ -105,18 +115,41 @@ class CommentServiceTest {
         List<String> contents =commentsResponses.stream()
                 .map(CommentsResponse::getContent) // CommentsResponse에서 content 필드 추출
                 .toList(); // List로 수집
-
         contents.forEach(System.out::println);
     }
 
     @Test
     @DisplayName("댓글 삭제")
     void deleteComment() {
+        //given
+        MemberDetails mockMemberDetails = new MemberDetails(member);
+        Long commentId = 1L;
+        //레포지토리에서 찾을때 comments.get(0)값으로 반환해줌.
+        when(commentRepository.findById(commentId)).thenReturn(Optional.of(comments.get(0)));
+        //where
+        commentService.deleteComment(mockMemberDetails, commentId);
+
+        //then
+        verify(commentRepository, times(1)).deleteById(commentId);
+
     }
 
     @Test
     @DisplayName("댓글 수정")
     void updateComment() {
+        //given
+        MemberDetails mockMemberDetails = new MemberDetails(member);
+        Long postId = 1L;
+        Long commentId =1L;
+        CommentsRequest commentsRequest = new CommentsRequest("author", content, postId);
+
+        when(commentRepository.findById(commentId)).thenReturn(Optional.of(comments.get(0)));
+        //whe
+        commentService.updateComment(mockMemberDetails, commentId,commentsRequest);
+
+        //then
+        verify(commentRepository, times(1)).save(any(Comment.class));
+        assert comments.get(0).getContent().equals("This is a comment");//바뀌었는지 확인
     }
 }
 

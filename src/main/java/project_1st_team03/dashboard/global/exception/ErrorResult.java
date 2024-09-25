@@ -1,6 +1,8 @@
 package project_1st_team03.dashboard.global.exception;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -13,6 +15,7 @@ import static project_1st_team03.dashboard.global.exception.FieldErrorCustom.get
  * 커스텀 예외 반환용 클래스
  */
 @Getter
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ErrorResult {
     private String code;
@@ -20,7 +23,7 @@ public class ErrorResult {
     private String message;
 
 
-    private List<FieldErrorCustom> filedErrors;
+    private List<FieldErrorCustom> fieldErrors;
 
     public ErrorResult(String code, int httpStatus, String message) {
         this.code = code;
@@ -37,6 +40,6 @@ public class ErrorResult {
     public ErrorResult(MethodArgumentNotValidException e) {
         this.code = String.valueOf(HttpStatus.BAD_REQUEST);
         this.httpStatus = HttpStatus.BAD_REQUEST.value();
-        this.filedErrors = getFieldErrorList(e.getFieldErrors());
+        this.fieldErrors = getFieldErrorList(e.getFieldErrors());
     }
 }

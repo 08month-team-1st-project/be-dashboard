@@ -4,7 +4,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +12,7 @@ import project_1st_team03.dashboard.domain.member.application.MemberService;
 import project_1st_team03.dashboard.domain.member.dto.LoginRequest;
 import project_1st_team03.dashboard.domain.member.dto.LoginResponse;
 import project_1st_team03.dashboard.domain.member.dto.SignupRequest;
+import project_1st_team03.dashboard.global.security.MemberDetails;
 
 
 /** 로그아웃 기능
@@ -30,10 +30,10 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping("/signup")
-    public ResponseEntity<String> signup(@RequestBody @Valid SignupRequest request) {
+    public ResponseEntity<Void> signup(@RequestBody @Valid SignupRequest request) {
 
         memberService.createMember(request);
-        return ResponseEntity.ok("회원가입을 축하드립니다.");
+        return ResponseEntity.ok().build();
     }
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest request) {
@@ -45,8 +45,8 @@ public class MemberController {
      * 인증이 필요한 요청에 잘 적용되는지 확인하는 용으로만 구현해둔 상태
      */
     @PostMapping("/logout")
-    public ResponseEntity<String> logout(@AuthenticationPrincipal UserDetails userDetails) {
-        memberService.logout(userDetails);
+    public ResponseEntity<String> logout(@AuthenticationPrincipal MemberDetails memberDetails) {
+        memberService.logout(memberDetails);
         return ResponseEntity.ok("로그아웃되었습니다.");
     }
 

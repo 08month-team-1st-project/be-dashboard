@@ -2,7 +2,6 @@ package project_1st_team03.dashboard.domain.member.application;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -59,9 +58,9 @@ public class MemberService {
     }
 
     // TODO 로그아웃: 프론트 코드 수정 & 일정에 따라서 수정 계획
-    public void logout(UserDetails userDetails) {
+    public void logout(MemberDetails memberDetails) {
         // 임시 확인용
-        log.debug(userDetails.getUsername());
-        log.debug(userDetails.getAuthorities().toString());
+        log.debug(memberDetails.getUsername());
+        log.debug(memberDetails.getAuthorities().toString());
     }
 }

@@ -1,5 +1,6 @@
 package project_1st_team03.dashboard.domain.post.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Getter;
@@ -22,6 +23,7 @@ public class PostListResponse {
 
     private long likeCount;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd_HH:mm", timezone = "Asia/Seoul")
     private LocalDateTime createdAt;
 
     private LocalDateTime modifiedAt;

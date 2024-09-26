@@ -48,6 +48,7 @@ public class SecurityConfig {
                                 .requestMatchers("/api/posts/search/**").permitAll()
                                 .requestMatchers(GET,"/api/posts/**").permitAll()
                                 .requestMatchers(GET,"/api/comments/**").permitAll()
+                                .requestMatchers(GET,"/api/replies/**").permitAll()
                                 .anyRequest().authenticated() // 그 외의 요청은 인증
                 )
                 .exceptionHandling(

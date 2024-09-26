@@ -17,8 +17,8 @@ import project_1st_team03.dashboard.domain.post.domain.Post;
 import project_1st_team03.dashboard.global.exception.ErrorCode;
 import project_1st_team03.dashboard.global.security.MemberDetails;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @Service
@@ -29,11 +29,12 @@ public final CommentRepository commentRepository;
 public final MemberRepository memberRepository;
 public final PostRepository postRepository;
 
+    @Transactional
     public void createComments(MemberDetails memberDetails,
             CommentsRequest commentsRequest) {
 
         Post post = postRepository.findById(commentsRequest.getPostId())
-                .orElseThrow(() -> new EntityNotFoundException("Post not found"));
+                .orElseThrow(() -> new CommentException(ErrorCode.NOT_FOUND_COMMENT));
 
         Member member = memberRepository.findByEmail( memberDetails.getUsername())
                 .orElseThrow(() -> new CommentException(ErrorCode.NOT_FOUND_COMMENT));
@@ -47,13 +48,9 @@ public final PostRepository postRepository;
     }
 
     public List<CommentsResponse> getAllComment() {
-        List<Comment> comments = commentRepository.findAll();
-
-        List<CommentsResponse> commentsResponses = comments.stream()
-                .map(CommentsResponse::new).collect(Collectors.toList());
-
-        return commentsResponses;
-
+        List<CommentsResponse> commentsResponses = commentRepository.findAllWithMemberEmail()
+                .orElse(new ArrayList<CommentsResponse>());
+        return commentsResponses ;
     }
 
     @Transactional

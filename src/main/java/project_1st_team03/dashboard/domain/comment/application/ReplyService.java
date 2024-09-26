@@ -2,10 +2,12 @@ package project_1st_team03.dashboard.domain.comment.application;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import project_1st_team03.dashboard.domain.comment.dao.CommentRepository;
 import project_1st_team03.dashboard.domain.comment.dao.ReplyRepository;
 import project_1st_team03.dashboard.domain.comment.domain.Comment;
 import project_1st_team03.dashboard.domain.comment.domain.Reply;
+import project_1st_team03.dashboard.domain.comment.dto.CommentsResponse;
 import project_1st_team03.dashboard.domain.comment.dto.ReplyRequest;
 import project_1st_team03.dashboard.domain.comment.dto.ReplyResponse;
 import project_1st_team03.dashboard.domain.comment.exception.CommentException;
@@ -14,6 +16,7 @@ import project_1st_team03.dashboard.domain.member.domain.Member;
 import project_1st_team03.dashboard.global.exception.ErrorCode;
 import project_1st_team03.dashboard.global.security.MemberDetails;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,6 +27,7 @@ public class ReplyService {
     private final CommentRepository commentRepository;
     private final MemberRepository memberRepository;
 
+    @Transactional
     public void createComments(
             MemberDetails memberDetails,
             ReplyRequest request) {
@@ -42,15 +46,13 @@ public class ReplyService {
         replyRepository.save(reply);
     }
 
-    public List<ReplyResponse> getAllComment() {
-        List<Reply> replies = replyRepository.findAll();
-       List<ReplyResponse> responses = replies.stream()
-               .map(ReplyResponse::new).toList();
+    public List<ReplyResponse> getReplyById(Long commentId) {
+        List<Reply> replies =replyRepository.findRepliesWithMemberByCommentId(commentId);
 
-        return  responses;
+        return replies.stream().map(ReplyResponse::new).toList();
     }
 
-
+    @Transactional
     public void deleteComment(MemberDetails memberDetails, Long id) {
 
         Reply reply = replyRepository.findById(id)
@@ -62,6 +64,7 @@ public class ReplyService {
         replyRepository.deleteById(id);
     }
 
+    @Transactional
     public void updateComment(MemberDetails memberDetails, Long id, ReplyRequest replyRequest) {
 
         Reply reply = replyRepository.findById(id)

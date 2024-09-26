@@ -25,30 +25,29 @@ public class ReplyController {
     private final ReplyService replyService;
 
     @PostMapping("/replies")
-    public ResponseEntity<String> createReply(
+    public ResponseEntity<Void> createReply(
             @AuthenticationPrincipal MemberDetails memberDetails,
             @RequestBody ReplyRequest request) {
 
         replyService.createComments(memberDetails,request);
-        return ResponseEntity.ok("답글이 성공적으로 작성되었습니다.");
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/replies")
-    public ResponseEntity<Map<String,Object>> getAllReplies() {
-        List<ReplyResponse> replyResponses = replyService.getAllComment();
-        //comments 필드로 응답.
+    public ResponseEntity<Map<String,Object>> getRepliesById(
+            @RequestParam("comment_id") Long commentId) {
+        List<ReplyResponse> replyResponses = replyService.getReplyById(commentId);
         Map<String, Object> response = new HashMap<>();
         response.put("reply", replyResponses);
-
         return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/replies/{replies_id}")
-    public ResponseEntity<String> deleteReplyByPathId(
+    public ResponseEntity<Void> deleteReplyByPathId(
             @AuthenticationPrincipal MemberDetails memberDetails,
             @PathVariable("replies_id") Long id){
         replyService.deleteComment(memberDetails,id);
-        return ResponseEntity.ok("댓글이 삭제되었습니다.");
+        return ResponseEntity.ok().build();
     }
 //
     @PutMapping("/replies/{replies_id}")
@@ -58,6 +57,6 @@ public class ReplyController {
             @RequestBody ReplyRequest ReplyRequest){
 
         replyService.updateComment(memberDetails,id,ReplyRequest);
-        return ResponseEntity.ok("댓글이 성공적으로 수정되었습니다.");
+        return ResponseEntity.ok().build();
     }
 }

@@ -28,11 +28,10 @@ public class PostController {
     }
 
     @PutMapping("/posts/{postId}")
-    public ResponseEntity<Void> updatePost(@AuthenticationPrincipal MemberDetails memberDetails,
+    public ResponseEntity<PostDetailDto> updatePost(@AuthenticationPrincipal MemberDetails memberDetails,
                                              @PathVariable("postId") long postId,
                                              @Valid @RequestBody PostRequest request) {
-        postService.updatePost(memberDetails, postId, request);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(postService.updatePost(memberDetails, postId, request));
     }
 
     @GetMapping("/posts")

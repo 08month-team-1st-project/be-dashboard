@@ -1,5 +1,6 @@
 package project_1st_team03.dashboard.domain.comment.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
@@ -21,7 +22,9 @@ public class CommentsResponse {
     private Long postId;
     private Long memberId;
     private String author;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd_HH:mm", timezone = "Asia/Seoul")
     private LocalDateTime createdAt;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd_HH:mm", timezone = "Asia/Seoul")
     private LocalDateTime modifiedAt;
 
     public CommentsResponse(Comment comment,String email) {

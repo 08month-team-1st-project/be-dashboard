@@ -30,6 +30,7 @@ public final CommentRepository commentRepository;
 public final MemberRepository memberRepository;
 public final PostRepository postRepository;
 
+    @Transactional
     public void createComments(MemberDetails memberDetails,
             CommentsRequest commentsRequest) {
 

@@ -1,5 +1,6 @@
 package project_1st_team03.dashboard.domain.comment.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import project_1st_team03.dashboard.domain.comment.domain.Reply;
 
@@ -14,7 +15,10 @@ public class ReplyResponse {
     private String content;
     private Long commentId;
     private Long memberId;
+    private String memberEmail;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd_HH:mm", timezone = "Asia/Seoul")
     private LocalDateTime createdAt;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd_HH:mm", timezone = "Asia/Seoul")
     private LocalDateTime modifiedAt;
 
     public ReplyResponse(Reply reply) {
@@ -22,6 +26,7 @@ public class ReplyResponse {
         this.content = reply.getContent();
         this.commentId = reply.getComment().getId();
         this.memberId = reply.getMember().getId();
+        this.memberEmail = reply.getMember().getEmail();
         this.createdAt = reply.getCreatedAt();
         this.modifiedAt = reply.getModifiedAt();
 

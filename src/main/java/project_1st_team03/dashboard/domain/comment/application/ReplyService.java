@@ -7,6 +7,7 @@ import project_1st_team03.dashboard.domain.comment.dao.CommentRepository;
 import project_1st_team03.dashboard.domain.comment.dao.ReplyRepository;
 import project_1st_team03.dashboard.domain.comment.domain.Comment;
 import project_1st_team03.dashboard.domain.comment.domain.Reply;
+import project_1st_team03.dashboard.domain.comment.dto.CommentsResponse;
 import project_1st_team03.dashboard.domain.comment.dto.ReplyRequest;
 import project_1st_team03.dashboard.domain.comment.dto.ReplyResponse;
 import project_1st_team03.dashboard.domain.comment.exception.CommentException;
@@ -15,6 +16,7 @@ import project_1st_team03.dashboard.domain.member.domain.Member;
 import project_1st_team03.dashboard.global.exception.ErrorCode;
 import project_1st_team03.dashboard.global.security.MemberDetails;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -44,12 +46,10 @@ public class ReplyService {
         replyRepository.save(reply);
     }
 
-    public List<ReplyResponse> getAllComment() {
-        List<Reply> replies = replyRepository.findAll();
-       List<ReplyResponse> responses = replies.stream()
-               .map(ReplyResponse::new).toList();
+    public List<ReplyResponse> getReplyById(Long commentId) {
+        List<Reply> replies =replyRepository.findRepliesWithMemberByCommentId(commentId);
 
-        return  responses;
+        return replies.stream().map(ReplyResponse::new).toList();
     }
 
     @Transactional

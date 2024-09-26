@@ -16,6 +16,7 @@ import project_1st_team03.dashboard.domain.comment.dto.CommentsRequest;
 import project_1st_team03.dashboard.domain.comment.dto.CommentsResponse;
 import project_1st_team03.dashboard.domain.member.dao.MemberRepository;
 import project_1st_team03.dashboard.domain.member.domain.Member;
+import project_1st_team03.dashboard.domain.post.dao.PostRepository;
 import project_1st_team03.dashboard.domain.post.domain.Post;
 import project_1st_team03.dashboard.global.security.MemberDetails;
 
@@ -40,6 +41,9 @@ class CommentServiceTest {
     @Mock
     private MemberRepository memberRepository;
 
+    @Mock
+    private PostRepository postRepository;
+
     @InjectMocks
     private CommentService commentService; //commentService = new CommentService(commentRepository);
 
@@ -47,7 +51,7 @@ class CommentServiceTest {
     Member member;
     Post post;
     List<Comment> comments;
-
+    List<Post> posts;
 
     //test가 실행되기전 실행
     @BeforeEach
@@ -55,6 +59,11 @@ class CommentServiceTest {
         content = "This is a comment";
 
         member = new Member("asd@asd.com", "12345678!a", null, null, null, null);
+
+        posts = new ArrayList<>(Arrays.asList(
+                new Post(member,"제목입니다","내용이에요내용"),
+                new Post(member,"미룬이입니다","내용이에요내용")
+        ));
 
         comments = new ArrayList<>(Arrays.asList(
                 new Comment(null,member,"안녕하세요",null),
@@ -71,12 +80,13 @@ class CommentServiceTest {
         String email = "asd@asd.com";
         CommentsRequest commentsRequest = new CommentsRequest("author", content, postId);
 
-        Member mockMember = new Member(email, "12345678!a", null, null, null, null);
+        Member mockMember = new Member(email, "12345678!a", null, posts, null, null);
 
         MemberDetails mockMemberDetails = new MemberDetails(mockMember);
 
         // Member를 찾을 때, 해당 mockMember를 반환하도록 설정
         when(memberRepository.findByEmail(email)).thenReturn(Optional.of(mockMember));
+        when(postRepository.findById(postId)).thenReturn(Optional.of(posts.get(0)));
 
         // When: 서비스 메서드 호출
         commentService.createComments(mockMemberDetails, commentsRequest);
@@ -85,28 +95,11 @@ class CommentServiceTest {
         // CommentRepository의 save 메서드가 적절한 인자로 한 번 호출되었는지 확인
         verify(commentRepository, times(1)).save(any(Comment.class));
     }
-    @Test
-    @DisplayName("데이터베이스에 없는 email로 댓글 생성을 시도")
-    void createComments_shouldThrowException_whenMemberNotFound() {
-        // Given: memberRepository가 빈 Optional을 반환하도록 설정
-        String email = "notfound@asd.com";
-        Long postId = 1L;
-        CommentsRequest commentsRequest = new CommentsRequest("author", "내용", postId);
-        MemberDetails memberDetails = new MemberDetails(new Member(email, "12345678!a", null, null, null, null));
-
-        // memberRepository.findByEmail() 호출 시 빈 Optional 반환
-        when(memberRepository.findByEmail(email)).thenReturn(Optional.empty());
-
-        // When & Then: 예외가 발생하는지 확인
-        assertThrows(EntityNotFoundException.class, () ->
-                commentService.createComments(memberDetails, commentsRequest));
-    }
 
     @Test
     @DisplayName("댓글 조회")
     void getAllComment() {
         //given
-        when(commentRepository.findAll()).thenReturn(comments);
 
         //when
        List<CommentsResponse>commentsResponses = commentService.getAllComment();

@@ -98,7 +98,7 @@ public class TestDataInit {
         Comment post1_1_comment4 = commentRepository.save(new Comment(post1_1 ,member5,"환영합니당"));
 
 
-        Comment post1_2_comment1 = commentRepository.save(new Comment(post1_1 ,member5,"당신에게 추천해줄 메뉴는 없어"));
+        Comment post1_2_comment1 = commentRepository.save(new Comment(post1_1 ,member6,"당신에게 추천해줄 메뉴는 없어"));
         Comment post1_2_comment2 = commentRepository.save(new Comment(post1_1 ,member2,"저녁은 굶으시죠"));
         Comment post1_2_comment3 = commentRepository.save(new Comment(post1_1 ,member1,"왜 그러세요.. 너무행"));
 
@@ -109,38 +109,41 @@ public class TestDataInit {
 
         Comment post3_comment1 = commentRepository.save(new Comment(post3, member2, "환영합니다!"));
         Comment post3_comment2 = commentRepository.save(new Comment(post3, member4, "새로 오신 분인가요? 반가워요."));
-        Comment post3_comment3 = commentRepository.save(new Comment(post3, member6, "어서 오세요!"));
+        Comment post3_comment3 = commentRepository.save(new Comment(post3, member6, "어서오고"));
 
         Comment post4_comment1 = commentRepository.save(new Comment(post4, member1, "ㅠㅠ 고양이 정말 귀엽죠..."));
         Comment post4_comment2 = commentRepository.save(new Comment(post4, member2, "저도 고양이가 없어서 아쉬워요."));
         Comment post4_comment3 = commentRepository.save(new Comment(post4, member5, "언젠가는 고양이를 만날 기회가 올 거예요!"));
+        Comment post4_comment4 = commentRepository.save(new Comment(post4, member6, "난 있지롱 ㅋㅋㅋ"));
 
         Comment post5_comment1 = commentRepository.save(new Comment(post5, member3, "날씨가 정말 시원해졌어요."));
         Comment post5_comment2 = commentRepository.save(new Comment(post5, member6, "벌써 가을이 온 것 같아요."));
         Comment post5_comment3 = commentRepository.save(new Comment(post5, member7, "맞아요, 이제 가을 패딩을 꺼내야 할 때가 됐어요."));
+        Comment post5_comment4 = commentRepository.save(new Comment(post5, member2, "가을패딩이요..? 야상이 아니라?"));
 
         Comment post6_comment1 = commentRepository.save(new Comment(post6, member4, "무슨 일 있나요? 괜찮으세요?"));
-        Comment post6_comment2 = commentRepository.save(new Comment(post6, member5, "화 푸세요... 같이 이야기해요."));
-        Comment post6_comment3 = commentRepository.save(new Comment(post6, member1, "힘내세요!"));
+        Comment post6_comment2 = commentRepository.save(new Comment(post6, member1, "화 푸세요... 같이 이야기해요."));
+        Comment post6_comment3 = commentRepository.save(new Comment(post6, member5, "힘내세요!"));
 
         Comment post7_comment1 = commentRepository.save(new Comment(post7, member2, "다이어트 응원할게요!"));
         Comment post7_comment2 = commentRepository.save(new Comment(post7, member5, "저도 같이 시작해볼까 생각 중이에요."));
-        Comment post7_comment3 = commentRepository.save(new Comment(post7, member6, "간디야~ 화이팅!"));
+        Comment post7_comment3 = commentRepository.save(new Comment(post7, member6, "다이어트는 내일부터 인거죠"));
 
         Comment post8_comment1 = commentRepository.save(new Comment(post8, member3, "요가나 필라테스 추천해요."));
         Comment post8_comment2 = commentRepository.save(new Comment(post8, member7, "웨이트 트레이닝도 좋은 선택이에요."));
         Comment post8_comment3 = commentRepository.save(new Comment(post8, member2, "가벼운 산책도 효과적이에요."));
+        Comment post8_comment4 = commentRepository.save(new Comment(post8, member6, "가벼운 산책은 무슨ㅋㅋ 뛰는게 최고임."));
 
         Comment post9_comment1 = commentRepository.save(new Comment(post9, member1, "무슨 일인가요? 도와드릴까요?"));
         Comment post9_comment2 = commentRepository.save(new Comment(post9, member4, "너무 무리하지 마세요."));
         Comment post9_comment3 = commentRepository.save(new Comment(post9, member5, "저도 가끔 그럴 때가 있어요. 힘내세요!"));
 
         Comment post10_comment1 = commentRepository.save(new Comment(post10, member3, "다이어트 식단, 어려워 보이네요."));
-        Comment post10_comment2 = commentRepository.save(new Comment(post10, member6, "닭고기는 좋은 선택이에요!"));
+        Comment post10_comment2 = commentRepository.save(new Comment(post10, member6, "닭이 불쌍하다"));
         Comment post10_comment3 = commentRepository.save(new Comment(post10, member1, "열심히 하세요, 응원할게요."));
 
 
-        Comment post11_comment1 = commentRepository.save(new Comment(post11, member1, "요즘은 M1 칩이 들어간 맥북이 좋다고 하더라구요."));
+        Comment post11_comment1 = commentRepository.save(new Comment(post11, member6, "닥 맥북아닙니까"));
         Comment post11_comment2 = commentRepository.save(new Comment(post11, member4, "용도에 따라 다르겠지만, 게임용이라면 고성능 게이밍 노트북 추천해요."));
         Comment post11_comment3 = commentRepository.save(new Comment(post11, member5, "문서 작업용이라면 가벼운 울트라북이 괜찮아요."));
 
@@ -150,7 +153,8 @@ public class TestDataInit {
 
         Comment post13_comment1 = commentRepository.save(new Comment(post13, member2, "축하해요! 고양이가 주인을 선택했다니 멋져요."));
         Comment post13_comment2 = commentRepository.save(new Comment(post13, member3, "이제 진정한 집사가 되었군요! 고양이와 행복한 시간 보내세요."));
-        Comment post13_comment3 = commentRepository.save(new Comment(post13, member6, "환영합니다, 집사의 세계로!"));
+        Comment post13_comment3 = commentRepository.save(new Comment(post13, member6, "저러다가 유기하겠지"));
+        Comment post13_comment4 = commentRepository.save(new Comment(post13, member1, "어서오세요, 집사의 세계로!"));
 
         Comment post14_comment1 = commentRepository.save(new Comment(post14, member1, "맞아요, 가을은 정말 짧은 것 같아요."));
         Comment post14_comment2 = commentRepository.save(new Comment(post14, member4, "올해 겨울에는 눈이 많이 올까요?"));
@@ -174,11 +178,12 @@ public class TestDataInit {
 
         Comment post19_comment1 = commentRepository.save(new Comment(post19, member1, "사용해보니 어떤 점이 아쉬운가요?"));
         Comment post19_comment2 = commentRepository.save(new Comment(post19, member3, "그래도 새 노트북은 항상 기대되죠!"));
-        Comment post19_comment3 = commentRepository.save(new Comment(post19, member5, "시간이 지나면 익숙해질 거예요. 잘 선택한 것 같아요."));
+        Comment post19_comment3 = commentRepository.save(new Comment(post19, member5, "어떤 모델로 사신거죠??"));
 
         Comment post20_comment1 = commentRepository.save(new Comment(post20, member2, "동물병원 진짜 비용이 만만치 않죠..."));
-        Comment post20_comment2 = commentRepository.save(new Comment(post20, member6, "고양이 병원비는 정말 놀라워요. 저도 겪어봤어요."));
+        Comment post20_comment2 = commentRepository.save(new Comment(post20, member6, "그니까 동물은 부자들만 키우는거지요"));
         Comment post20_comment3 = commentRepository.save(new Comment(post20, member7, "그래도 건강을 위해선 어쩔 수 없죠. 힘내세요!"));
+        Comment post20_comment4 = commentRepository.save(new Comment(post20, member4, "그래도 저는 우리 나비 덕분에 삽니다.."));
 
         Comment post21_comment1 = commentRepository.save(new Comment(post21, member1, "패딩 추천하면, 노스페이스가 괜찮지 않을까요?"));
         Comment post21_comment2 = commentRepository.save(new Comment(post21, member3, "가격대도 적당하고, 유니클로 패딩도 좋더라고요."));

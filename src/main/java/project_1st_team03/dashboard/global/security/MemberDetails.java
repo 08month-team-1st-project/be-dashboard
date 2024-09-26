@@ -1,5 +1,6 @@
 package project_1st_team03.dashboard.global.security;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -21,6 +22,7 @@ public class MemberDetails implements UserDetails {
 
     private MemberRole role;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd_HH:mm", timezone = "Asia/Seoul")
     private LocalDateTime createdAt;
 
     private LocalDateTime modifiedAt;

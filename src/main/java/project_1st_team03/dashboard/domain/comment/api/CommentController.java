@@ -1,13 +1,12 @@
 package project_1st_team03.dashboard.domain.comment.api;
 
-import lombok.Getter;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import project_1st_team03.dashboard.domain.comment.application.CommentService;
-import project_1st_team03.dashboard.domain.comment.domain.Comment;
 import project_1st_team03.dashboard.domain.comment.dto.CommentsRequest;
 import project_1st_team03.dashboard.domain.comment.dto.CommentsResponse;
 import project_1st_team03.dashboard.global.security.MemberDetails;
@@ -27,7 +26,7 @@ public class CommentController {
     @PostMapping("/comments")
     public ResponseEntity<Void> createComment(
             @AuthenticationPrincipal MemberDetails memberDetails,
-            @RequestBody CommentsRequest request) {
+            @Valid @RequestBody CommentsRequest request) {
 
         commentService.createComments(memberDetails,request);
         return ResponseEntity.ok().build();

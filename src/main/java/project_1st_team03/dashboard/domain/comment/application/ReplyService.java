@@ -2,6 +2,7 @@ package project_1st_team03.dashboard.domain.comment.application;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import project_1st_team03.dashboard.domain.comment.dao.CommentRepository;
 import project_1st_team03.dashboard.domain.comment.dao.ReplyRepository;
 import project_1st_team03.dashboard.domain.comment.domain.Comment;
@@ -24,6 +25,7 @@ public class ReplyService {
     private final CommentRepository commentRepository;
     private final MemberRepository memberRepository;
 
+    @Transactional
     public void createComments(
             MemberDetails memberDetails,
             ReplyRequest request) {
@@ -50,7 +52,7 @@ public class ReplyService {
         return  responses;
     }
 
-
+    @Transactional
     public void deleteComment(MemberDetails memberDetails, Long id) {
 
         Reply reply = replyRepository.findById(id)
@@ -62,6 +64,7 @@ public class ReplyService {
         replyRepository.deleteById(id);
     }
 
+    @Transactional
     public void updateComment(MemberDetails memberDetails, Long id, ReplyRequest replyRequest) {
 
         Reply reply = replyRepository.findById(id)

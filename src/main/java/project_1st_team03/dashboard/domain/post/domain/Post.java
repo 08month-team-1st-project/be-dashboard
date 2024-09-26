@@ -19,7 +19,7 @@ import java.util.List;
 public class Post extends BaseEntity {
 
     @JoinColumn(name = "member_id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Member member;
 
     @Column(nullable = false, length = 30)

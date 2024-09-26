@@ -25,12 +25,12 @@ public class CommentController {
     private final CommentService commentService;
 
     @PostMapping("/comments")
-    public ResponseEntity<String> createComment(
+    public ResponseEntity<Void> createComment(
             @AuthenticationPrincipal MemberDetails memberDetails,
             @RequestBody CommentsRequest request) {
 
         commentService.createComments(memberDetails,request);
-        return ResponseEntity.ok("댓글이 성공적으로 작성되었습니다.");
+        return ResponseEntity.ok().build();
     }
 
 
@@ -48,21 +48,21 @@ public class CommentController {
     }
 
     @DeleteMapping("/comments/{comment_id}")
-    public ResponseEntity<String> deleteCommentByPathId(
+    public ResponseEntity<Void> deleteCommentByPathId(
             @AuthenticationPrincipal MemberDetails memberDetails,
             @PathVariable("comment_id") Long id){
 
         commentService.deleteComment(memberDetails,id);
-        return ResponseEntity.ok("댓글이 삭제되었습니다.");
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("/comments/{comment_id}")
-    public ResponseEntity<String> updateComment(
+    public ResponseEntity<Void> updateComment(
             @AuthenticationPrincipal MemberDetails memberDetails,
             @PathVariable("comment_id") Long id,
             @RequestBody CommentsRequest commentRequest){
     
         commentService.updateComment(memberDetails,id,commentRequest);
-        return ResponseEntity.ok("댓글이 성공적으로 수정되었습니다.");
+        return ResponseEntity.ok().build();
     }
 }

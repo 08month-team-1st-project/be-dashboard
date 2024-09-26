@@ -13,6 +13,7 @@ import project_1st_team03.dashboard.domain.comment.exception.CommentException;
 import project_1st_team03.dashboard.domain.member.dao.MemberRepository;
 import project_1st_team03.dashboard.domain.member.domain.Member;
 import project_1st_team03.dashboard.domain.post.dao.PostRepository;
+import project_1st_team03.dashboard.domain.post.domain.Post;
 import project_1st_team03.dashboard.global.exception.ErrorCode;
 import project_1st_team03.dashboard.global.security.MemberDetails;
 
@@ -31,8 +32,8 @@ public final PostRepository postRepository;
     public void createComments(MemberDetails memberDetails,
             CommentsRequest commentsRequest) {
 
-        //Post post = postRepository.findById(commentsRequest.getPostId())
-        //        .orElseThrow(() -> new EntityNotFoundException("Post not found"));
+        Post post = postRepository.findById(commentsRequest.getPostId())
+                .orElseThrow(() -> new EntityNotFoundException("Post not found"));
 
         Member member = memberRepository.findByEmail( memberDetails.getUsername())
                 .orElseThrow(() -> new CommentException(ErrorCode.NOT_FOUND_COMMENT));
@@ -40,7 +41,7 @@ public final PostRepository postRepository;
         Comment comment = Comment.builder()
                 .content(commentsRequest.getContent())
                 .member(member)
-                .post(null)
+                .post(post)
                 .build();
         commentRepository.save(comment);
     }
@@ -48,16 +49,9 @@ public final PostRepository postRepository;
     public List<CommentsResponse> getAllComment() {
         List<Comment> comments = commentRepository.findAll();
 
-        List<CommentsResponse> commentsResponses = comments.stream().map((comment)->
-            CommentsResponse.builder()
-                    .id(comment.getId())
-                    .content(comment.getContent())
-                    .memberId(comment.getMember().getId())
-                    .postId(1L)
-                    .createdAt(comment.getCreatedAt())
-                    .modifiedAt(comment.getModifiedAt())
-                    .build()
-        ).collect(Collectors.toList());
+        List<CommentsResponse> commentsResponses = comments.stream()
+                .map(CommentsResponse::new).collect(Collectors.toList());
+
         return commentsResponses;
 
     }

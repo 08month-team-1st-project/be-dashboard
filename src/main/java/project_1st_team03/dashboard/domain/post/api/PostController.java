@@ -52,11 +52,11 @@ public class PostController {
         return ResponseEntity.ok(postService.getPostDetail(postId));
     }
 
-    // TODO 작업용 (푸시할땐 지워야함)
-    @GetMapping("/comments")
-    public ResponseEntity<?> getAllComments() {
-        return ResponseEntity.ok().build();
-    }
+//    // TODO 작업용 (푸시할땐 지워야함)
+//    @GetMapping("/comments")
+//    public ResponseEntity<?> getAllComments() {
+//        return ResponseEntity.ok().build();
+//    }
 
 
 }

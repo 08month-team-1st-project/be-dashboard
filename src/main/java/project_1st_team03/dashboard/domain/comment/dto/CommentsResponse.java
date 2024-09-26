@@ -20,14 +20,16 @@ public class CommentsResponse {
     private String content;
     private Long postId;
     private Long memberId;
+    private String author;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
 
-    public CommentsResponse(Comment comment) {
+    public CommentsResponse(Comment comment,String email) {
         this.id = comment.getId();
         content = comment.getContent();
         postId = comment.getPost().getId();
         memberId = comment.getMember().getId();
+        author = email;
         createdAt = comment.getCreatedAt();
         modifiedAt = comment.getModifiedAt();
     }

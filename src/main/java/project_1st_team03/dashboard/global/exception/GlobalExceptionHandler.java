@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import project_1st_team03.dashboard.domain.comment.exception.CommentException;
 import project_1st_team03.dashboard.domain.member.exception.MemberException;
 import project_1st_team03.dashboard.domain.post.exception.PostException;
 
@@ -42,6 +43,13 @@ public class GlobalExceptionHandler {
                 .body(new ErrorResult(errorCode));
     }
 
+    @ExceptionHandler(CommentException.class)
+    public ResponseEntity<ErrorResult> handlePostException(CommentException e) {
+        log.error("[CommentException] message= {}", e.getMessage());
 
+        ErrorCode errorCode = e.getErrorCode();
+        return ResponseEntity.status(errorCode.getHttpStatus())
+                .body(new ErrorResult(errorCode));
+    }
 
 }

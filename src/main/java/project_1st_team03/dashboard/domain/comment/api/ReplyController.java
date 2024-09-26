@@ -1,5 +1,6 @@
 package project_1st_team03.dashboard.domain.comment.api;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +28,7 @@ public class ReplyController {
     @PostMapping("/replies")
     public ResponseEntity<Void> createReply(
             @AuthenticationPrincipal MemberDetails memberDetails,
-            @RequestBody ReplyRequest request) {
+            @Valid @RequestBody ReplyRequest request) {
 
         replyService.createComments(memberDetails,request);
         return ResponseEntity.ok().build();

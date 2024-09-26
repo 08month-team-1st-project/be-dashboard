@@ -87,7 +87,7 @@ public class TestDataInit {
         Post post20 = postRepository.save(new Post(member4, "동물병원비 비싼줄은 알았지만...", "진짜 장난 아니네요... ㄷㄷㄷ...."));
         Post post21 = postRepository.save(new Post(member5, "올 해 겨울에 입을 패딩 추천 부탁드려요!", "30만원 이하대로 추천부탁드려용"));
         Post post22 = postRepository.save(new Post(member6, "정말 불만스러워요!", "ㅋ...ㅋㅋ.ㅋ..."));
-        Post post23 = postRepository.save(new Post(member7, "케톤측정기 샀어용, 여러분", "신기해용"));
+        Post post23 = postRepository.save(new Post(member7, "케톤측정기 대박이네요 여러분", "강추합니다!"));
         Post post24 = postRepository.save(new Post(member1, "병원밥 진짜 노맛이네요...", "병원밥도 노맛이고, 같은 병실 사람 때문에 미치겠어요"));
 
 //        entityManager.flush();

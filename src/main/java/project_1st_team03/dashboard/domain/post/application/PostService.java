@@ -56,7 +56,7 @@ public class PostService {
     }
 
     @Transactional
-    public void updatePost(MemberDetails memberDetails, long postId, PostRequest request) {
+    public PostDetailDto updatePost(MemberDetails memberDetails, long postId, PostRequest request) {
 
         Post findPost = postRepository
                 .findById(postId).orElseThrow(() -> new PostException(NOT_FOUND_POST));
@@ -67,6 +67,8 @@ public class PostService {
         }
 
         findPost.updateTitleAndContent(request.getTitle(), request.getContent());
+
+        return new PostDetailDto(findPost);
     }
 
     public Page<PostListResponse> getPostPage(Pageable pageable) {

@@ -13,9 +13,11 @@ import project_1st_team03.dashboard.domain.member.dao.MemberRepository;
 import project_1st_team03.dashboard.domain.member.domain.Member;
 import project_1st_team03.dashboard.domain.post.dao.PostRepository;
 import project_1st_team03.dashboard.domain.post.domain.Post;
+import project_1st_team03.dashboard.domain.post.type.PostStatus;
 import project_1st_team03.dashboard.global.security.MemberRole;
 
 import static project_1st_team03.dashboard.domain.member.domain.Member.createMember;
+import static project_1st_team03.dashboard.domain.post.type.PostStatus.*;
 
 /**
  * - 테스트 코드가 익숙치 않은 상황에서
@@ -61,34 +63,34 @@ public class TestDataInit {
 //        entityManager.clear();
 
 
-        Post post1_1 = postRepository.save(new Post(member1, "오잉 아직 아무도 게시글 안 쓰셨네", "내가 1빠"));
-        Post post1_2 = postRepository.save(new Post(member1, "오늘 저녁메뉴 추천 좀 해주세요", "뭐 먹을까요"));
+        Post post1_1 = postRepository.save(new Post(member1, "오잉 아직 아무도 게시글 안 쓰셨네", "내가 1빠", NORMAL));
+        Post post1_2 = postRepository.save(new Post(member1, "오늘 저녁메뉴 추천 좀 해주세요", "뭐 먹을까요", NORMAL));
 
-        Post post2 = postRepository.save(new Post(member2, "안녕하십니까", "여긴 뭐하는 곳인가요"));
-        Post post3 = postRepository.save(new Post(member3, "안녕하세요! 오늘 가입했어요!!", "인사드립니다!!"));
-        Post post4 = postRepository.save(new Post(member4, "나만 고양이 없어", "ㅠㅜㅜ"));
-        Post post5 = postRepository.save(new Post(member5, "요즘 날이 선선해진 것 같아요", ""));
-        Post post6 = postRepository.save(new Post(member6, "진짜 화가나네요", "진짜로 진짜로 화가 많이 나네요"));
-        Post post7 = postRepository.save(new Post(member7, "키토식 + 간헐적 단식 시작하겠습니당..", "간드아"));
-        Post post8 = postRepository.save(new Post(member1, "혹시 여러분, 추천해주실만한 운동 있나여", "추천 부탁드립니당"));
-        Post post9 = postRepository.save(new Post(member3, "참 막막하네요...", "내 인생..."));
-        Post post10 = postRepository.save(new Post(member7, "식단 좀 봐주세요", "닭 백숙"));
+        Post post2 = postRepository.save(new Post(member2, "안녕하십니까", "여긴 뭐하는 곳인가요", NORMAL));
+        Post post3 = postRepository.save(new Post(member3, "안녕하세요! 오늘 가입했어요!!", "인사드립니다!!", NORMAL));
+        Post post4 = postRepository.save(new Post(member4, "나만 고양이 없어", "ㅠㅜㅜ", NORMAL));
+        Post post5 = postRepository.save(new Post(member5, "요즘 날이 선선해진 것 같아요", "", NORMAL));
+        Post post6 = postRepository.save(new Post(member6, "진짜 화가나네요", "진짜로 진짜로 화가 많이 나네요", NORMAL));
+        Post post7 = postRepository.save(new Post(member7, "키토식 + 간헐적 단식 시작하겠습니당..", "간드아", NORMAL));
+        Post post8 = postRepository.save(new Post(member1, "혹시 여러분, 추천해주실만한 운동 있나여", "추천 부탁드립니당", NORMAL));
+        Post post9 = postRepository.save(new Post(member3, "참 막막하네요...", "내 인생...", NORMAL));
+        Post post10 = postRepository.save(new Post(member7, "식단 좀 봐주세요", "닭 백숙", NORMAL));
 
-        Post post11 = postRepository.save(new Post(member2, "노트북 추천 좀요", "뭐 살까요"));
-        Post post12 = postRepository.save(new Post(member3, "전 이만 떠나겠습니다..", "여러분 잘 지내요"));
-        Post post13 = postRepository.save(new Post(member4, "고양이한테 간택 받았어요!!", "나도 이제 집사다!!"));
-        Post post14 = postRepository.save(new Post(member5, "이제 금방 추워지겠죠?", "가을이 너무 짧네요"));
-        Post post15 = postRepository.save(new Post(member6, "!!!진짜 화가나네요!!!!!!!", "다 부숴버린드아아"));
-        Post post16 = postRepository.save(new Post(member7, "케톤측정기 샀어용, 여러분", "신기해용"));
-        Post post17 = postRepository.save(new Post(member1, "운동 중 근육파열...", "하하하..."));
-        Post post18 = postRepository.save(new Post(member7, "탄수화물 끊기시작하니까...", "얼굴 트러블이 줄었어요!!"));
+        Post post11 = postRepository.save(new Post(member2, "노트북 추천 좀요", "뭐 살까요", NORMAL));
+        Post post12 = postRepository.save(new Post(member3, "전 이만 떠나겠습니다..", "여러분 잘 지내요", NORMAL));
+        Post post13 = postRepository.save(new Post(member4, "고양이한테 간택 받았어요!!", "나도 이제 집사다!!", NORMAL));
+        Post post14 = postRepository.save(new Post(member5, "이제 금방 추워지겠죠?", "가을이 너무 짧네요", NORMAL));
+        Post post15 = postRepository.save(new Post(member6, "!!!진짜 화가나네요!!!!!!!", "다 부숴버린드아아", NORMAL));
+        Post post16 = postRepository.save(new Post(member7, "케톤측정기 샀어용, 여러분", "신기해용", NORMAL));
+        Post post17 = postRepository.save(new Post(member1, "운동 중 근육파열...", "하하하...", NORMAL));
+        Post post18 = postRepository.save(new Post(member7, "탄수화물 끊기시작하니까...", "얼굴 트러블이 줄었어요!!", NORMAL));
 
-        Post post19 = postRepository.save(new Post(member2, "노트북 샀는데요...", "흠.. 생각보단 .. 좋은지 모르겠네요"));
-        Post post20 = postRepository.save(new Post(member4, "동물병원비 비싼줄은 알았지만...", "진짜 장난 아니네요... ㄷㄷㄷ...."));
-        Post post21 = postRepository.save(new Post(member5, "올 해 겨울에 입을 패딩 추천 부탁드려요!", "30만원 이하대로 추천부탁드려용"));
-        Post post22 = postRepository.save(new Post(member6, "정말 불만스러워요!", "ㅋ...ㅋㅋ.ㅋ..."));
-        Post post23 = postRepository.save(new Post(member7, "케톤측정기 대박이네요 여러분", "강추합니다!"));
-        Post post24 = postRepository.save(new Post(member1, "병원밥 진짜 노맛이네요...", "병원밥도 노맛이고, 같은 병실 사람 때문에 미치겠어요"));
+        Post post19 = postRepository.save(new Post(member2, "노트북 샀는데요...", "흠.. 생각보단 .. 좋은지 모르겠네요", NORMAL));
+        Post post20 = postRepository.save(new Post(member4, "동물병원비 비싼줄은 알았지만...", "진짜 장난 아니네요... ㄷㄷㄷ....", NORMAL));
+        Post post21 = postRepository.save(new Post(member5, "올 해 겨울에 입을 패딩 추천 부탁드려요!", "30만원 이하대로 추천부탁드려용", NORMAL));
+        Post post22 = postRepository.save(new Post(member6, "정말 불만스러워요!", "ㅋ...ㅋㅋ.ㅋ...", NORMAL));
+        Post post23 = postRepository.save(new Post(member7, "케톤측정기 대박이네요 여러분", "강추합니다!", NORMAL));
+        Post post24 = postRepository.save(new Post(member1, "병원밥 진짜 노맛이네요...", "병원밥도 노맛이고, 같은 병실 사람 때문에 미치겠어요", NORMAL));
 
 //        entityManager.flush();
 //        entityManager.clear();

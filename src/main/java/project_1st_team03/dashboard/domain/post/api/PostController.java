@@ -51,11 +51,12 @@ public class PostController {
         return ResponseEntity.ok(postService.getPostDetail(postId));
     }
 
-//    // TODO 작업용 (푸시할땐 지워야함)
-//    @GetMapping("/comments")
-//    public ResponseEntity<?> getAllComments() {
-//        return ResponseEntity.ok().build();
-//    }
+    @DeleteMapping("/posts/{postId}")
+    public ResponseEntity<Void> deletePost(@AuthenticationPrincipal MemberDetails memberDetails,
+                                                    @PathVariable("postId") long postId) {
+        postService.deletePost(memberDetails, postId);
+        return ResponseEntity.ok().build();
+    }
 
 
 }

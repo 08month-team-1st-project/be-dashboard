@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project_1st_team03.dashboard.domain.member.dao.MemberRepository;
@@ -20,6 +19,7 @@ import project_1st_team03.dashboard.global.security.MemberDetails;
 
 import java.util.Objects;
 
+import static project_1st_team03.dashboard.domain.post.type.PostStatus.NORMAL;
 import static project_1st_team03.dashboard.global.exception.ErrorCode.*;
 
 
@@ -50,6 +50,7 @@ public class PostService {
                 .title(request.getTitle())
                 .content(request.getContent())
                 .member(member)
+                .status(NORMAL)
                 .build();
 
         postRepository.save(post);
@@ -63,7 +64,7 @@ public class PostService {
 
         // 본인이 작성하지 않은 게시글은 수정할 수 없음
         if (!Objects.equals(memberDetails.getId(), findPost.getMember().getId())) {
-            throw new PostException(UNAUTHORIZED_EDIT_POST_ATTEMPT);
+            throw new PostException(UNAUTHORIZED_EDIT_OR_DELETE_POST_ATTEMPT);
         }
 
         findPost.updateTitleAndContent(request.getTitle(), request.getContent());
@@ -86,5 +87,18 @@ public class PostService {
                 .orElseThrow(() -> new PostException(NOT_FOUND_POST));
 
         return new PostDetailDto(findPost);
+    }
+
+    @Transactional
+    public void deletePost(MemberDetails memberDetails, long postId) {
+
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new PostException(NOT_FOUND_POST));
+
+        if(!memberDetails.getId().equals(post.getMember().getId())){
+            throw new PostException(UNAUTHORIZED_EDIT_OR_DELETE_POST_ATTEMPT);
+        }
+        post.delete();
+        postRepository.save(post);
     }
 }

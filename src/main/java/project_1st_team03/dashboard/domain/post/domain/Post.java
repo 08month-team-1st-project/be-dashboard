@@ -7,9 +7,12 @@ import project_1st_team03.dashboard.domain.comment.domain.Comment;
 import project_1st_team03.dashboard.domain.common.BaseEntity;
 import project_1st_team03.dashboard.domain.like.domain.Like;
 import project_1st_team03.dashboard.domain.member.domain.Member;
+import project_1st_team03.dashboard.domain.post.type.PostStatus;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static project_1st_team03.dashboard.domain.post.type.PostStatus.*;
 
 @Getter
 @Builder
@@ -36,10 +39,16 @@ public class Post extends BaseEntity {
     @OneToMany(mappedBy = "post")
     private List<Like> likes = new ArrayList<>();
 
-    public Post(Member member, String title, String content) {
+    // 게시글 삭제 시 바로 db에서 지우는 것이 아닌 체크방식으로 하였음
+    // 현재 프로젝트에서 구현하지는 않지만 확장성을 고려해서 enum으로 관리 ex) 정상, 삭제, 신고상태
+    @Enumerated(value = EnumType.STRING)
+    private PostStatus status;
+
+    public Post(Member member, String title, String content, PostStatus status) {
         this.member = member;
         this.title = title;
         this.content = content;
+        this.status = status;
     }
 
     public void updateTitleAndContent(String title, String content) {
@@ -50,5 +59,9 @@ public class Post extends BaseEntity {
         if(StringUtils.hasText(content)){
             this.content = content;
         }
+    }
+
+    public void delete() {
+        status = DELETE;
     }
 }

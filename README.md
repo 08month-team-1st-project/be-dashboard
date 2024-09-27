@@ -39,8 +39,13 @@
   - 제목과 본문 내용, 인증을 통한 정보로 게시글 수정
     - 요청에서 받은 id로 게시글을 찾을 수 없을 시 404 와 에러코드 반환
     - 인증을 거친 사용자가 해당 게시글 작성자가 아닐 시 403 과 에러코드 반환
+- #### 게시글 삭제 (인증)
+  - 게시글 id와 인증을 통한 정보로 게시글 삭제
+    - db에 있는 데이터 자체를 지우는 것이 아닌 상태값을 DELETE 로 변경 
+    - 요청에서 받은 id로 게시글을 찾을 수 없을 시 404 와 에러코드 반환
+    - 인증을 거친 사용자가 해당 게시글 작성자가 아닐 시 403 과 에러코드 반환
 - #### 게시글 일반조회
-    - 등록돼있는 게시글을 페이징 처리하여 조회
+    - 등록돼있는 게시글을 페이징 처리하여 조회 (게시글의 상태가 NORMAL 인 것만 조회)
       - 최신순으로 정렬
       - 페이지 사이즈는 10으로 고정
 - #### 게시글 검색
@@ -107,30 +112,44 @@
 
 
 ```
-src
-├─main
-│  ├─java
-│  │  └─project_1st_team03
-│  │      └─dashboard
-│  │          ├─domain
-│  │          │  ├─comment
-│  │          │  │  ├─api
-│  │          │  │  ├─application
-│  │          │  │  ├─dao
-│  │          │  │  ├─domain
-│  │          │  │  ├─dto
-│  │          │  │  └─exception
-│  │          │  └─post
-│  │          │      ├─api
-│  │          │      ├─application
-│  │          │      ├─dao
-│  │          │      ├─domain
-│  │          │      ├─dto
-│  │          │      └─exception
-│  │          └─global
-│  │              ├─config
-│  │              ├─exception
-│  │              └─security
+└─src
+    ├─main
+    │  ├─java
+    │  │  └─project_1st_team03
+    │  │      └─dashboard
+    │  │          ├─domain
+    │  │          │  ├─comment
+    │  │          │  │  ├─api
+    │  │          │  │  ├─application
+    │  │          │  │  ├─dao
+    │  │          │  │  ├─domain
+    │  │          │  │  ├─dto
+    │  │          │  │  └─exception
+    │  │          │  ├─common
+    │  │          │  ├─like
+    │  │          │  │  ├─api
+    │  │          │  │  ├─application
+    │  │          │  │  ├─dao
+    │  │          │  │  └─domain
+    │  │          │  ├─member
+    │  │          │  │  ├─api
+    │  │          │  │  ├─application
+    │  │          │  │  ├─dao
+    │  │          │  │  ├─domain
+    │  │          │  │  ├─dto
+    │  │          │  │  └─exception
+    │  │          │  └─post
+    │  │          │      ├─api
+    │  │          │      ├─application
+    │  │          │      ├─dao
+    │  │          │      ├─domain
+    │  │          │      ├─dto
+    │  │          │      └─exception
+    │  │          └─global
+    │  │              ├─config
+    │  │              ├─exception
+    │  │              └─security
+
 
 ```
 도메인 기준으로 패키지 계층을 분리하였다.

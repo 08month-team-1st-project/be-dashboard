@@ -26,6 +26,7 @@ public class PostListResponse {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd_HH:mm", timezone = "Asia/Seoul")
     private LocalDateTime createdAt;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd_HH:mm", timezone = "Asia/Seoul")
     private LocalDateTime modifiedAt;
 
 
